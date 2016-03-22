@@ -24,7 +24,6 @@ f << a.f;
   let it = new iteration() in
   it#add_virtual_rule F_found;
   it#add_virtual_identifier F f;
-  it#add_virtual_identifier P p;
   it#register()
 
 @b depends on f_found exists@
@@ -71,13 +70,11 @@ f << virtual.f;
 cocci.include_match(False)
 
 @script:python@
-p1 << b.p;
-p << virtual.p;
+p << b.p;
 @@
 print "%s %s: :%s" %("Do not check for ERR pointer here:",p[0].file,p[0].line)
 
 @script:python@
-p1 << c.p1;
-p << virtual.p;
+p << c.p1;
 @@
 print "%s %s: :%s" %("Do not check for NULL pointer",p[0].file,p[0].line)
